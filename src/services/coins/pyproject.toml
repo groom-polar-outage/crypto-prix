@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "coins"
+version = "0.1.2"
+description = "Get coin price data"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+influxdb-client = "^1.44.0"
+requests = "^2.32.3"
+pendulum = "^3.0.0"
+loguru = "^0.7.2"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.10"
+pytest = "^8.2.2"
+
+[tool.ruff.lint]
+extend-select = ["E501"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
