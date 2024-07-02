@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "coins"
+version = "0.1.0"
+description = "Get coin price data"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+influxdb-client = "^1.44.0"
+fastapi = "^0.111.0"
+pendulum = "^3.0.0"
+loguru = "^0.7.2"
+fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
+aiosqlite = "^0.20.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.10"
+pytest = "^8.2.2"
+uvicorn = "^0.30.1"
+
+[tool.ruff.lint]
+extend-select = ["E501"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
