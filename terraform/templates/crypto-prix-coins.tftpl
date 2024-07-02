@@ -1,0 +1,30 @@
+jobs:
+  coins:
+    image:
+      repository: liningunplugthespian/crypto-prix-coins
+      tag: ${TAG}
+      imagePullPolicy: IfNotPresent
+    schedule: "${CRON}"
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 3
+    concurrencyPolicy: Allow
+    restartPolicy: OnFailure
+    env:
+    - name: TIMEZONE
+      value: ${TIMEZONE}
+    - name: TSDB_ORG
+      value: ${TSDB_ORG}
+    - name: TSDB_BUCKET
+      value: ${TSDB_BUCKET}
+    - name: COINGECKO_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: ${CG_SECRET_NAME}
+          key: ${CG_SECRET_KEY}
+    - name: TSDB_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: ${TSDB_SECRET_NAME}
+          key: ${TSDB_SECRET_KEY}
+    - name: TSDB_URL
+      value: ${TSDB_URL}
