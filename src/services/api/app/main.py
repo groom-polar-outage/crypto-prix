@@ -6,7 +6,7 @@ if TYPE_CHECKING:
 
 from os import remove
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, status
 from fastapi_users.schemas import BaseUser, BaseUserCreate, BaseUserUpdate
 from pendulum import now
 
@@ -37,9 +37,20 @@ app.include_router(fastapi_users.get_users_router(BaseUser, BaseUserUpdate),
                    prefix="/users")
 
 
-@app.get("/price")
+@app.get("/price", tags=["coins"])
 async def price(user: User = Depends(active_user)):
     return {
         "req_time": now(CONFIG.TIMEZONE).to_rfc3339_string(),
         "data": get_data()
     }
+
+
+@app.get("/liveness", status_code=status.HTTP_200_OK, tags=["health"])
+async def liveness_probe():
+    return {"status": "alive"}
+
+
+@app.get("/readiness", status_code=status.HTTP_200_OK, tags=["health"])
+async def readiness_probe():
+    return {"status": "ready"}
+
