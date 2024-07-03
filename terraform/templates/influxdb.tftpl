@@ -4,3 +4,6 @@ adminUser:
   retention_policy: ${RETENTION}
 persistence:
   enabled: ${PERSISTENCE}
+env:
+  - name: INFLUXD_BOLT_PATH
+    value: ${INFLUXD_BOLT_PATH}
