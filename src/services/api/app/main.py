@@ -23,7 +23,7 @@ async def lifespan(app: FastAPI):
     remove("test.db")
 
 
-app = FastAPI(lifespan=lifespan, root_path="/api/v1")
+app = FastAPI(lifespan=lifespan, root_path=CONFIG.API_VERSION_PATH)
 
 app.include_router(fastapi_users.get_auth_router(auth_backend), tags=["auth"])
 app.include_router(

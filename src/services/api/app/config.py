@@ -36,5 +36,9 @@ class Config:
     def TIMEZONE(self) -> "Timezone":
         return timezone(environ["TIMEZONE"])
 
+    @property
+    def API_VERSION_PATH(self) -> str:
+        return "/api/v1"
+
 
 CONFIG = Config()

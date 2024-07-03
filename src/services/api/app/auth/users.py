@@ -25,7 +25,7 @@ async def _get_user_manager(user_db: SQLAlchemyUserDatabase = Depends(get_user_d
     yield _UserManager(user_db)
 
 
-_bearer_transport = BearerTransport(tokenUrl="/login")
+_bearer_transport = BearerTransport(tokenUrl=f"{CONFIG.API_VERSION_PATH}/login")
 
 
 def _get_jwt_strategy():
