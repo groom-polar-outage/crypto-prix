@@ -27,4 +27,4 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY app ./app
 
-CMD ["fastapi", "run", "app/main.py", "--port", "8080"]
+CMD ["fastapi", "run", "app/main.py", "--port", "80"]

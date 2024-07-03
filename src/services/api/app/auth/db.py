@@ -1,5 +1,8 @@
 from fastapi import Depends
-from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
+from fastapi_users_db_sqlalchemy import (
+    SQLAlchemyBaseUserTableUUID,
+    SQLAlchemyUserDatabase,
+)
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -13,7 +16,9 @@ class User(SQLAlchemyBaseUserTableUUID, _Base):
 
 
 _engine = create_async_engine(_DATABASE_URL)
-_async_session_maker = sessionmaker(_engine, class_=AsyncSession, expire_on_commit=False)
+_async_session_maker = sessionmaker(
+    _engine, class_=AsyncSession, expire_on_commit=False
+)
 
 
 async def create_db_and_tables():

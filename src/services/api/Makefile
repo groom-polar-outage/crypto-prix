@@ -6,8 +6,8 @@ env-update:
 	poetry update
 
 fmt:
-	poetry run ruff check --fix
 	poetry run ruff format
+	poetry run ruff check --fix
 
 build-push:
 	docker build --tag liningunplugthespian/crypto-prix-api:$(version) .
