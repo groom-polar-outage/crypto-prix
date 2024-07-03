@@ -56,7 +56,7 @@ resource "helm_release" "coins" {
   reset_values = true
   reuse_values = true
 
-  values = [templatefile("${path.root}/templates/crypto-prix-coins.tftpl", {
+  values = [templatefile("${path.root}/templates/coins-db.tftpl", {
     TAG="0.1.2"
     CRON="*/5 * * * *"
     TIMEZONE=var.crypto_prix_conf.timezone
@@ -70,6 +70,7 @@ resource "helm_release" "coins" {
   })]
 
 }
+
 resource "helm_release" "api" {
   chart = "${path.root}/helm-charts/coins-api"
   name  = "coins-api"
@@ -82,7 +83,7 @@ resource "helm_release" "api" {
   reuse_values = true
 
   values = [templatefile("${path.root}/templates/coins-api.tftpl", {
-    TAG="0.1.0"
+    TAG="0.2.2"
     TIMEZONE=var.crypto_prix_conf.timezone
     TSDB_ORG=var.crypto_prix_conf.tsdb_org
     TSDB_BUCKET=var.crypto_prix_conf.tsdb_bucket
@@ -92,5 +93,4 @@ resource "helm_release" "api" {
     FASTAPI_SECRET_NAME=kubernetes_secret.fastapi_users_secret.metadata[0].name
     FASTAPI_SECRET_KEY="secret"
   })]
-
 }

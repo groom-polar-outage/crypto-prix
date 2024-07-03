@@ -14,7 +14,7 @@ variable "crypto_prix_conf" {
   default = {
     kube_config = {
       path    = "~/.kube/config"
-      context = "rancher-desktop"
+      context = "<rancher/docker>-desktop"
     }
     coingecko_api_key = "CHANGE-ME"
     fastapi_users_secret = "CHANGE-ME"
@@ -22,5 +22,5 @@ variable "crypto_prix_conf" {
     tsdb_org = "FOO"
     tsdb_bucket = "BAR"
   }
-  description = "configs"
+  description = "input variable configs"
 }
