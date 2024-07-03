@@ -6,6 +6,7 @@ variable "crypto_prix_conf" {
       context = string
     })
     coingecko_api_key = string
+    fastapi_users_secret = string
     tsdb_org=string
     tsdb_bucket=string
     timezone=string
@@ -16,6 +17,7 @@ variable "crypto_prix_conf" {
       context = "rancher-desktop"
     }
     coingecko_api_key = "CHANGE-ME"
+    fastapi_users_secret = "CHANGE-ME"
     timezone = "Europe/Prague"
     tsdb_org = "FOO"
     tsdb_bucket = "BAR"

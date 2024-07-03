@@ -70,3 +70,27 @@ resource "helm_release" "coins" {
   })]
 
 }
+resource "helm_release" "api" {
+  chart = "${path.root}/helm-charts/coins-api"
+  name  = "coins-api"
+  description = "API to get coin price data."
+
+  namespace = kubernetes_namespace.this.id
+
+  atomic = true
+  reset_values = true
+  reuse_values = true
+
+  values = [templatefile("${path.root}/templates/coins-api.tftpl", {
+    TAG="0.1.0"
+    TIMEZONE=var.crypto_prix_conf.timezone
+    TSDB_ORG=var.crypto_prix_conf.tsdb_org
+    TSDB_BUCKET=var.crypto_prix_conf.tsdb_bucket
+    TSDB_URL=data.kubernetes_service.coind_db.metadata[0].name
+    TSDB_SECRET_NAME=data.kubernetes_secret.coind_db_auth.metadata[0].name
+    TSDB_SECRET_KEY="admin-token"
+    FASTAPI_SECRET_NAME=kubernetes_secret.fastapi_users_secret.metadata[0].name
+    FASTAPI_SECRET_KEY="secret"
+  })]
+
+}

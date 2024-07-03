@@ -22,3 +22,13 @@ resource "kubernetes_secret" "coingecko_api_key" {
     api-key = var.crypto_prix_conf.coingecko_api_key
   }
 }
+resource "kubernetes_secret" "fastapi_users_secret" {
+  metadata {
+    name      = "fastapi-secret"
+    namespace = kubernetes_namespace.this.id
+  }
+
+  data = {
+    secret = var.crypto_prix_conf.fastapi_users_secret
+  }
+}
