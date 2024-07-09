@@ -13,7 +13,7 @@ from pendulum import now
 from app.config import CONFIG
 from app.auth.users import auth_backend, fastapi_users, active_user
 from app.auth.db import create_db_and_tables
-from app.connectors.tsdb import get_data
+from app.connectors.tsdb import get_last_data, get_average_data
 
 
 @asynccontextmanager
@@ -39,8 +39,26 @@ app.include_router(
 
 
 @app.get("/price", tags=["coins"])
-async def price(user: User = Depends(active_user)):
-    return {"req_time": now(CONFIG.TIMEZONE).to_rfc3339_string(), "data": get_data()}
+async def price(
+    user: User = Depends(active_user), coin: str = "bitcoin", currency: str = "usd"
+):
+    return {
+        "req_time": now(CONFIG.TIMEZONE).to_rfc3339_string(),
+        "data": get_last_data(coin, currency),
+    }
+
+
+@app.get("/price/averages", tags=["coins"])
+async def price_averages(
+    user: User = Depends(active_user),
+    coin: str = "bitcoin",
+    currency: str = "usd",
+    timeframe: str = "1d",
+):
+    return {
+        "req_time": now(CONFIG.TIMEZONE).to_rfc3339_string(),
+        "data": get_average_data(coin, currency, timeframe),
+    }
 
 
 @app.get("/liveness", status_code=status.HTTP_200_OK, tags=["health"])
