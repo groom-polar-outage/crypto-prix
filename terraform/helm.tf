@@ -84,7 +84,7 @@ resource "helm_release" "api" {
   reuse_values = true
 
   values = [templatefile("${path.root}/templates/coins-api.tftpl", {
-    TAG                 = "0.2.2"
+    TAG                 = "0.3.0"
     TIMEZONE            = var.crypto_prix_conf.timezone
     TSDB_ORG            = var.crypto_prix_conf.tsdb_org
     TSDB_BUCKET         = var.crypto_prix_conf.tsdb_bucket
